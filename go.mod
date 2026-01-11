@@ -1,4 +1,4 @@
-module github.com/yourusername/golang-safirclient
+module bitbucket.bilgem.tubitak.gov.tr/scm/hasan.acar/golang-safirclient
 
 go 1.22
 

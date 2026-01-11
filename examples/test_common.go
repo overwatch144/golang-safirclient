@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
+	"bitbucket.bilgem.tubitak.gov.tr/scm/hasan.acar/golang-safirclient/common"
 	"github.com/gophercloud/gophercloud/v2"
-	"github.com/yourusername/golang-safirclient/common"
 )
 
 func main() {
@@ -57,7 +57,6 @@ func main() {
 	// 2. Test Service Endpoint Discovery
 	log.Println("\n=== Testing Service Endpoint Discovery ===")
 
-	// Try to get Safir Optimization endpoint
 	optimizationEndpoint, err := auth.GetEndpoint(common.ServiceTypeOptimization)
 	if err != nil {
 		log.Printf("⚠ Safir Optimization endpoint not found: %v", err)
@@ -65,7 +64,6 @@ func main() {
 		log.Printf("✓ Safir Optimization endpoint: %s", optimizationEndpoint)
 	}
 
-	// Try to get Safir Migration endpoint
 	migrationEndpoint, err := auth.GetEndpoint(common.ServiceTypeMigration)
 	if err != nil {
 		log.Printf("⚠ Safir Migration endpoint not found: %v", err)
@@ -73,7 +71,6 @@ func main() {
 		log.Printf("✓ Safir Migration endpoint: %s", migrationEndpoint)
 	}
 
-	// Try to get Safir Cloud Watcher endpoint
 	cloudWatcherEndpoint, err := auth.GetEndpoint(common.ServiceTypeCloudWatcher)
 	if err != nil {
 		log.Printf("⚠ Safir Cloud Watcher endpoint not found: %v", err)
@@ -81,7 +78,7 @@ func main() {
 		log.Printf("✓ Safir Cloud Watcher endpoint: %s", cloudWatcherEndpoint)
 	}
 
-	// 3. Test Base Client (if we have an endpoint)
+	// 3. Test Base Client
 	log.Println("\n=== Testing Base Client ===")
 
 	if optimizationEndpoint != "" {
@@ -93,13 +90,10 @@ func main() {
 		}
 
 		client := common.NewBaseClient(config)
-		log.Printf("✓ Base client created for Safir Optimization")
+		log.Printf("✓ Base client created")
 		log.Printf("  - Endpoint: %s", client.GetEndpoint())
 		log.Printf("  - API Version: %s", client.GetAPIVersion())
-		log.Printf("  - Service Type: %s", client.GetServiceType())
 
-		// Test ping
-		log.Println("  - Testing ping...")
 		if err := client.Ping(); err != nil {
 			log.Printf("⚠ Ping failed: %v", err)
 		} else {
@@ -107,10 +101,9 @@ func main() {
 		}
 	}
 
-	// 4. Test Utility Functions
+	// 4. Test Utilities
 	log.Println("\n=== Testing Utility Functions ===")
 
-	// Test BuildQueryString
 	listOpts := &common.ListOptions{
 		Limit:   10,
 		Marker:  "test-marker",
@@ -119,37 +112,6 @@ func main() {
 	}
 	queryString := common.BuildQueryString(listOpts)
 	log.Printf("✓ Query string: %s", queryString)
-
-	// Test NormalizeEndpoint
-	endpoint1 := common.NormalizeEndpoint("http://10.13.0.10:9323/")
-	endpoint2 := common.NormalizeEndpoint("http://10.13.0.10:9323")
-	log.Printf("✓ Normalized endpoints: %s, %s", endpoint1, endpoint2)
-
-	// Test BuildEndpointURL
-	fullURL := common.BuildEndpointURL("http://10.13.0.10:9323", "v1")
-	log.Printf("✓ Full endpoint URL: %s", fullURL)
-
-	// 5. Test Error Types
-	log.Println("\n=== Testing Error Types ===")
-
-	apiErr := &common.APIError{
-		StatusCode: 404,
-		Message:    "Resource not found",
-		URL:        "http://example.com/resource",
-		Method:     "GET",
-	}
-	log.Printf("✓ APIError: %v", apiErr)
-	log.Printf("  - IsNotFound: %t", common.IsNotFound(apiErr))
-	log.Printf("  - IsServerError: %t", common.IsServerError(apiErr))
-
-	authErr := &common.AuthError{Message: "Invalid credentials"}
-	log.Printf("✓ AuthError: %v", authErr)
-
-	validationErr := &common.ValidationError{
-		Field:   "username",
-		Message: "cannot be empty",
-	}
-	log.Printf("✓ ValidationError: %v", validationErr)
 
 	log.Println("\n=== All Tests Completed ===")
 }

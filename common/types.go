@@ -69,7 +69,7 @@ type ServiceType string
 
 const (
 	ServiceTypeOptimization ServiceType = "safiroptimization"
-	ServiceTypeMigration    ServiceType = "safirmigration"
+	ServiceTypeMigration    ServiceType = "migration"
 	ServiceTypeCloudWatcher ServiceType = "cloud_watcher"
 )
 

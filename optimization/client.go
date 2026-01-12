@@ -3,7 +3,7 @@ package optimization
 import (
 	"fmt"
 
-	"bitbucket.bilgem.tubitak.gov.tr/scm/hasan.acar/golang-safirclient/common"
+	"github.com/overwatch144/golang-safirclient/common"
 )
 
 // Client represents the Safir Optimization API client

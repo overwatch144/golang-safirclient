@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"bitbucket.bilgem.tubitak.gov.tr/scm/hasan.acar/golang-safirclient/common"
 	"github.com/gophercloud/gophercloud/v2"
+	"github.com/overwatch144/golang-safirclient/common"
 )
 
 func main() {

@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"bitbucket.bilgem.tubitak.gov.tr/scm/hasan.acar/golang-safirclient/optimization"
+	"github.com/overwatch144/golang-safirclient/optimization"
 )
 
 func main() {

@@ -86,3 +86,24 @@ func NewClientWithAuthenticator(auth *common.Authenticator) (*Client, error) {
 		BaseClient: baseClient,
 	}, nil
 }
+
+// NewClientWithToken creates a new Optimization client with existing token and endpoint
+// Use this when you already have a valid token and know the endpoint
+func NewClientWithToken(endpoint, token string) *Client {
+	// Create token authenticator
+	tokenAuth := common.NewTokenAuthenticator(endpoint, token)
+
+	// Create base client with /api/v1 prefix
+	baseConfig := common.BaseClientConfig{
+		Endpoint:      common.NormalizeEndpoint(endpoint) + "/api",
+		Authenticator: tokenAuth,
+		ServiceType:   common.ServiceTypeOptimization,
+		APIVersion:    "v1",
+	}
+
+	baseClient := common.NewBaseClient(baseConfig)
+
+	return &Client{
+		BaseClient: baseClient,
+	}
+}

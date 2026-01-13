@@ -6,10 +6,10 @@ import (
 )
 
 // ListHostMaintenancePolicies retrieves all host maintenance policies
-func (c *Client) ListHostMaintenancePolicies(clusterID *int) ([]HostMaintenancePolicy, error) {
+func (c *Client) ListHostMaintenancePolicies(clusterID *string) ([]HostMaintenancePolicy, error) {
 	path := "/host-maintenance"
 	if clusterID != nil {
-		path = fmt.Sprintf("%s?cluster_id=%d", path, *clusterID)
+		path = fmt.Sprintf("%s?cluster_id=%s", path, *clusterID)
 	}
 
 	resp, err := c.DoRequest(http.MethodGet, path, nil)
@@ -26,8 +26,8 @@ func (c *Client) ListHostMaintenancePolicies(clusterID *int) ([]HostMaintenanceP
 }
 
 // GetHostMaintenancePolicy retrieves a specific host maintenance policy by ID
-func (c *Client) GetHostMaintenancePolicy(policyID int) (*HostMaintenancePolicy, error) {
-	path := fmt.Sprintf("/host-maintenance/%d", policyID)
+func (c *Client) GetHostMaintenancePolicy(policyID string) (*HostMaintenancePolicy, error) {
+	path := fmt.Sprintf("/host-maintenance/%s", policyID)
 	resp, err := c.DoRequest(http.MethodGet, path, nil)
 	if err != nil {
 		return nil, err
@@ -57,8 +57,8 @@ func (c *Client) CreateHostMaintenancePolicy(req *HostMaintenancePolicyCreate) (
 }
 
 // UpdateHostMaintenancePolicy updates a host maintenance policy
-func (c *Client) UpdateHostMaintenancePolicy(policyID int, req *HostMaintenancePolicyUpdate) (*HostMaintenancePolicy, error) {
-	path := fmt.Sprintf("/host-maintenance/%d", policyID)
+func (c *Client) UpdateHostMaintenancePolicy(policyID string, req *HostMaintenancePolicyUpdate) (*HostMaintenancePolicy, error) {
+	path := fmt.Sprintf("/host-maintenance/%s", policyID)
 	resp, err := c.DoRequest(http.MethodPut, path, req)
 	if err != nil {
 		return nil, err
@@ -73,8 +73,8 @@ func (c *Client) UpdateHostMaintenancePolicy(policyID int, req *HostMaintenanceP
 }
 
 // DeleteHostMaintenancePolicy deletes a host maintenance policy
-func (c *Client) DeleteHostMaintenancePolicy(policyID int) error {
-	path := fmt.Sprintf("/host-maintenance/%d", policyID)
+func (c *Client) DeleteHostMaintenancePolicy(policyID string) error {
+	path := fmt.Sprintf("/host-maintenance/%s", policyID)
 	resp, err := c.DoRequest(http.MethodDelete, path, nil)
 	if err != nil {
 		return err

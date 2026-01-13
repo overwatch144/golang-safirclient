@@ -6,10 +6,10 @@ import (
 )
 
 // ListWorkloadConsolidationPolicies retrieves all workload consolidation policies
-func (c *Client) ListWorkloadConsolidationPolicies(clusterID *int) ([]WorkloadConsolidationPolicy, error) {
+func (c *Client) ListWorkloadConsolidationPolicies(clusterID *string) ([]WorkloadConsolidationPolicy, error) {
 	path := "/workload-consolidation"
 	if clusterID != nil {
-		path = fmt.Sprintf("%s?cluster_id=%d", path, *clusterID)
+		path = fmt.Sprintf("%s?cluster_id=%s", path, *clusterID)
 	}
 
 	resp, err := c.DoRequest(http.MethodGet, path, nil)
@@ -26,8 +26,8 @@ func (c *Client) ListWorkloadConsolidationPolicies(clusterID *int) ([]WorkloadCo
 }
 
 // GetWorkloadConsolidationPolicy retrieves a specific workload consolidation policy by ID
-func (c *Client) GetWorkloadConsolidationPolicy(policyID int) (*WorkloadConsolidationPolicy, error) {
-	path := fmt.Sprintf("/workload-consolidation/%d", policyID)
+func (c *Client) GetWorkloadConsolidationPolicy(policyID string) (*WorkloadConsolidationPolicy, error) {
+	path := fmt.Sprintf("/workload-consolidation/%s", policyID)
 	resp, err := c.DoRequest(http.MethodGet, path, nil)
 	if err != nil {
 		return nil, err
@@ -57,8 +57,8 @@ func (c *Client) CreateWorkloadConsolidationPolicy(req *WorkloadConsolidationPol
 }
 
 // UpdateWorkloadConsolidationPolicy updates a workload consolidation policy
-func (c *Client) UpdateWorkloadConsolidationPolicy(policyID int, req *WorkloadConsolidationPolicyUpdate) (*WorkloadConsolidationPolicy, error) {
-	path := fmt.Sprintf("/workload-consolidation/%d", policyID)
+func (c *Client) UpdateWorkloadConsolidationPolicy(policyID string, req *WorkloadConsolidationPolicyUpdate) (*WorkloadConsolidationPolicy, error) {
+	path := fmt.Sprintf("/workload-consolidation/%s", policyID)
 	resp, err := c.DoRequest(http.MethodPut, path, req)
 	if err != nil {
 		return nil, err
@@ -73,8 +73,8 @@ func (c *Client) UpdateWorkloadConsolidationPolicy(policyID int, req *WorkloadCo
 }
 
 // DeleteWorkloadConsolidationPolicy deletes a workload consolidation policy
-func (c *Client) DeleteWorkloadConsolidationPolicy(policyID int) error {
-	path := fmt.Sprintf("/workload-consolidation/%d", policyID)
+func (c *Client) DeleteWorkloadConsolidationPolicy(policyID string) error {
+	path := fmt.Sprintf("/workload-consolidation/%s", policyID)
 	resp, err := c.DoRequest(http.MethodDelete, path, nil)
 	if err != nil {
 		return err

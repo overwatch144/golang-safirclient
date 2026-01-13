@@ -6,10 +6,10 @@ import (
 )
 
 // ListWorkloadBalancingPolicies retrieves all workload balancing policies
-func (c *Client) ListWorkloadBalancingPolicies(clusterID *int) ([]WorkloadBalancingPolicy, error) {
+func (c *Client) ListWorkloadBalancingPolicies(clusterID *string) ([]WorkloadBalancingPolicy, error) {
 	path := "/workload-balancing"
 	if clusterID != nil {
-		path = fmt.Sprintf("%s?cluster_id=%d", path, *clusterID)
+		path = fmt.Sprintf("%s?cluster_id=%s", path, *clusterID)
 	}
 
 	resp, err := c.DoRequest(http.MethodGet, path, nil)
@@ -26,8 +26,8 @@ func (c *Client) ListWorkloadBalancingPolicies(clusterID *int) ([]WorkloadBalanc
 }
 
 // GetWorkloadBalancingPolicy retrieves a specific workload balancing policy by ID
-func (c *Client) GetWorkloadBalancingPolicy(policyID int) (*WorkloadBalancingPolicy, error) {
-	path := fmt.Sprintf("/workload-balancing/%d", policyID)
+func (c *Client) GetWorkloadBalancingPolicy(policyID string) (*WorkloadBalancingPolicy, error) {
+	path := fmt.Sprintf("/workload-balancing/%s", policyID)
 	resp, err := c.DoRequest(http.MethodGet, path, nil)
 	if err != nil {
 		return nil, err
@@ -57,8 +57,8 @@ func (c *Client) CreateWorkloadBalancingPolicy(req *WorkloadBalancingPolicyCreat
 }
 
 // UpdateWorkloadBalancingPolicy updates a workload balancing policy
-func (c *Client) UpdateWorkloadBalancingPolicy(policyID int, req *WorkloadBalancingPolicyUpdate) (*WorkloadBalancingPolicy, error) {
-	path := fmt.Sprintf("/workload-balancing/%d", policyID)
+func (c *Client) UpdateWorkloadBalancingPolicy(policyID string, req *WorkloadBalancingPolicyUpdate) (*WorkloadBalancingPolicy, error) {
+	path := fmt.Sprintf("/workload-balancing/%s", policyID)
 	resp, err := c.DoRequest(http.MethodPut, path, req)
 	if err != nil {
 		return nil, err
@@ -73,8 +73,8 @@ func (c *Client) UpdateWorkloadBalancingPolicy(policyID int, req *WorkloadBalanc
 }
 
 // DeleteWorkloadBalancingPolicy deletes a workload balancing policy
-func (c *Client) DeleteWorkloadBalancingPolicy(policyID int) error {
-	path := fmt.Sprintf("/workload-balancing/%d", policyID)
+func (c *Client) DeleteWorkloadBalancingPolicy(policyID string) error {
+	path := fmt.Sprintf("/workload-balancing/%s", policyID)
 	resp, err := c.DoRequest(http.MethodDelete, path, nil)
 	if err != nil {
 		return err

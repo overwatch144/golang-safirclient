@@ -21,8 +21,8 @@ func (c *Client) ListClusters() ([]Cluster, error) {
 }
 
 // GetCluster retrieves a specific cluster by ID
-func (c *Client) GetCluster(clusterID int) (*Cluster, error) {
-	path := fmt.Sprintf("/clusters/%d", clusterID)
+func (c *Client) GetCluster(clusterID string) (*Cluster, error) {
+	path := fmt.Sprintf("/clusters/%s", clusterID)
 	resp, err := c.DoRequest(http.MethodGet, path, nil)
 	if err != nil {
 		return nil, err
@@ -52,8 +52,8 @@ func (c *Client) CreateCluster(req *ClusterCreate) (*Cluster, error) {
 }
 
 // UpdateCluster updates an existing cluster
-func (c *Client) UpdateCluster(clusterID int, req *ClusterUpdate) (*Cluster, error) {
-	path := fmt.Sprintf("/clusters/%d", clusterID)
+func (c *Client) UpdateCluster(clusterID string, req *ClusterUpdate) (*Cluster, error) {
+	path := fmt.Sprintf("/clusters/%s", clusterID)
 	resp, err := c.DoRequest(http.MethodPut, path, req)
 	if err != nil {
 		return nil, err
@@ -68,8 +68,8 @@ func (c *Client) UpdateCluster(clusterID int, req *ClusterUpdate) (*Cluster, err
 }
 
 // DeleteCluster deletes a cluster
-func (c *Client) DeleteCluster(clusterID int) error {
-	path := fmt.Sprintf("/clusters/%d", clusterID)
+func (c *Client) DeleteCluster(clusterID string) error {
+	path := fmt.Sprintf("/clusters/%s", clusterID)
 	resp, err := c.DoRequest(http.MethodDelete, path, nil)
 	if err != nil {
 		return err

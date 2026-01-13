@@ -10,8 +10,7 @@ type Trial struct {
 
 // Cluster represents a cluster
 type Cluster struct {
-	ID          int    `json:"id"`
-	UUID        string `json:"uuid"`
+	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description,omitempty"`
 	CreatedAt   string `json:"created_at"`           // String olarak değiştir
@@ -32,8 +31,8 @@ type ClusterUpdate struct {
 
 // ClusterHost represents a host in a cluster
 type ClusterHost struct {
-	ID        int    `json:"id"`
-	ClusterID int    `json:"cluster_id"`
+	ID        string `json:"id"`
+	ClusterID string `json:"cluster_id"`
 	Hostname  string `json:"hostname"`
 	Enabled   bool   `json:"enabled"`
 	CreatedAt string `json:"created_at"`           // String olarak değiştir
@@ -54,8 +53,8 @@ type ClusterHostUpdate struct {
 
 // ClusterExcludedVM represents an excluded VM
 type ClusterExcludedVM struct {
-	ID        int    `json:"id"`
-	ClusterID int    `json:"cluster_id"`
+	ID        string `json:"id"`
+	ClusterID string `json:"cluster_id"`
 	VMName    string `json:"vm_name"`
 	CreatedAt string `json:"created_at"`           // String olarak değiştir
 	UpdatedAt string `json:"updated_at,omitempty"` // String olarak değiştir
@@ -68,9 +67,8 @@ type ClusterExcludedVMCreate struct {
 
 // HostMaintenancePolicy represents a host maintenance policy
 type HostMaintenancePolicy struct {
-	ID        int    `json:"id"`
-	UUID      string `json:"uuid"`
-	ClusterID int    `json:"cluster_id"`
+	ID        string `json:"id"`
+	ClusterID string `json:"cluster_id"`
 	Name      string `json:"name"`
 	Enabled   bool   `json:"enabled"`
 	CreatedAt string `json:"created_at"`           // String olarak değiştir
@@ -79,23 +77,22 @@ type HostMaintenancePolicy struct {
 
 // HostMaintenancePolicyCreate represents policy creation request
 type HostMaintenancePolicyCreate struct {
-	ClusterID int    `json:"cluster_id"`
+	ClusterID string `json:"cluster_id"`
 	Name      string `json:"name"`
 	Enabled   bool   `json:"enabled"`
 }
 
 // HostMaintenancePolicyUpdate represents policy update request
 type HostMaintenancePolicyUpdate struct {
-	ClusterID int    `json:"cluster_id,omitempty"`
+	ClusterID string `json:"cluster_id,omitempty"`
 	Name      string `json:"name,omitempty"`
 	Enabled   *bool  `json:"enabled,omitempty"`
 }
 
 // WorkloadBalancingPolicy represents a workload balancing policy
 type WorkloadBalancingPolicy struct {
-	ID              int    `json:"id"`
-	UUID            string `json:"uuid"`
-	ClusterID       int    `json:"cluster_id"`
+	ID              string `json:"id"`
+	ClusterID       string `json:"cluster_id"`
 	Name            string `json:"name"`
 	BalancingMode   string `json:"balancing_mode"`
 	CPUBalancing    bool   `json:"cpu_balancing"`
@@ -108,7 +105,7 @@ type WorkloadBalancingPolicy struct {
 
 // WorkloadBalancingPolicyCreate represents policy creation request
 type WorkloadBalancingPolicyCreate struct {
-	ClusterID       int    `json:"cluster_id"`
+	ClusterID       string `json:"cluster_id"`
 	Name            string `json:"name"`
 	BalancingMode   string `json:"balancing_mode"`
 	CPUBalancing    bool   `json:"cpu_balancing"`
@@ -119,7 +116,7 @@ type WorkloadBalancingPolicyCreate struct {
 
 // WorkloadBalancingPolicyUpdate represents policy update request
 type WorkloadBalancingPolicyUpdate struct {
-	ClusterID       int    `json:"cluster_id,omitempty"`
+	ClusterID       string `json:"cluster_id,omitempty"`
 	Name            string `json:"name,omitempty"`
 	BalancingMode   string `json:"balancing_mode,omitempty"`
 	CPUBalancing    *bool  `json:"cpu_balancing,omitempty"`
@@ -130,9 +127,8 @@ type WorkloadBalancingPolicyUpdate struct {
 
 // WorkloadConsolidationPolicy represents a workload consolidation policy
 type WorkloadConsolidationPolicy struct {
-	ID        int    `json:"id"`
-	UUID      string `json:"uuid"`
-	ClusterID int    `json:"cluster_id"`
+	ID        string `json:"id"`
+	ClusterID string `json:"cluster_id"`
 	Name      string `json:"name"`
 	Period    int    `json:"period"`
 	Enabled   bool   `json:"enabled"`
@@ -142,7 +138,7 @@ type WorkloadConsolidationPolicy struct {
 
 // WorkloadConsolidationPolicyCreate represents policy creation request
 type WorkloadConsolidationPolicyCreate struct {
-	ClusterID int    `json:"cluster_id"`
+	ClusterID string `json:"cluster_id"`
 	Name      string `json:"name"`
 	Period    int    `json:"period"`
 	Enabled   bool   `json:"enabled"`
@@ -150,7 +146,7 @@ type WorkloadConsolidationPolicyCreate struct {
 
 // WorkloadConsolidationPolicyUpdate represents policy update request
 type WorkloadConsolidationPolicyUpdate struct {
-	ClusterID int    `json:"cluster_id,omitempty"`
+	ClusterID string `json:"cluster_id,omitempty"`
 	Name      string `json:"name,omitempty"`
 	Period    int    `json:"period,omitempty"`
 	Enabled   *bool  `json:"enabled,omitempty"`

@@ -34,7 +34,7 @@ func main() {
 	} else {
 		log.Printf("✓ Found %d clusters", len(clusters))
 		for _, cluster := range clusters {
-			log.Printf("  - %s (ID: %d, UUID: %s)", cluster.Name, cluster.ID, cluster.UUID)
+			log.Printf("  - %s (ID: %d)", cluster.Name, cluster.ID)
 		}
 	}
 
